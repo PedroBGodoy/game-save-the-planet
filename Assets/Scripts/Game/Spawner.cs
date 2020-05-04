@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float spawnRate = 2f;
-    public bool canSpawn = false;
-    public bool isSpawning = false;
-    public bool fakeSpawn = false;
-    public float spawnDistanceFromBoundary = 1f;
+    [SerializeField] private float spawnRate = 2f;
+    [SerializeField] private bool canSpawn = false;
+    [SerializeField] private bool isSpawning = false;
+    [SerializeField] private bool fakeSpawn = false;
+    [SerializeField] private float spawnDistanceFromBoundary = 1f;
+    [SerializeField] private float startSpawnDelay = 3f;
 
     public GameObject meteorPrefab;
 
@@ -113,7 +114,7 @@ public class Spawner : MonoBehaviour
 
     private void OnPlay()
     {
-        canSpawn = true;
+        StartCoroutine("StartSpawner");
     }
 
     private void OnMenu()
@@ -121,6 +122,13 @@ public class Spawner : MonoBehaviour
         canSpawn = false;
         isSpawning = false;
         StopAllCoroutines();
+    }
+
+    IEnumerator StartSpawner()
+    {
+        yield return new WaitForSeconds(startSpawnDelay);
+
+        canSpawn = true;
     }
 
 }

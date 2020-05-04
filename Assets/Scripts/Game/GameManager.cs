@@ -17,11 +17,7 @@ public class GameManager : MonoBehaviour
     public delegate void ResetDelegate();
     public static event ResetDelegate OnReset;
 
-    public int score
-    {
-        get;
-        private set;
-    }
+    public int score { get; private set; }
 
     private void Awake()
     {
