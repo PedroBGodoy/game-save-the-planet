@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
-    [SerializeField] private float inMenuPosition = -15f;
-    [SerializeField] private float inGamePosition = -10f;
     [SerializeField] private float translationSpeed = .5f;
     public AnimationCurve translationCurve;
 
@@ -17,20 +12,6 @@ public class CameraController : MonoBehaviour
     {
         cam = GetComponent<Camera>();
         targetPosition = transform.position.z;
-    }
-
-    private void OnEnable()
-    {
-        GameManager.OnGameOver += OnGameOver;
-        GameManager.OnPlay += OnPlay;
-        GameManager.OnMenu += OnMenu;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnGameOver -= OnGameOver;
-        GameManager.OnPlay -= OnPlay;
-        GameManager.OnMenu -= OnMenu;
     }
 
     private void Update()
@@ -45,19 +26,9 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void OnGameOver()
+    public void MoveCameraTo(float _targetPosition)
     {
-        targetPosition = inGamePosition;
-    }
-
-    private void OnPlay()
-    {
-        targetPosition = inGamePosition;
-    }
-
-    private void OnMenu()
-    {
-        targetPosition = inMenuPosition;
+        targetPosition = _targetPosition;
     }
 
 }

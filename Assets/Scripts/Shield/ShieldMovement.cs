@@ -9,22 +9,7 @@ public class ShieldMovement : MonoBehaviour
     [SerializeField] private bool canRotate = true;
 
     private float xMov = 0;
-
     private bool inMenuRotation = true;
-
-    private void OnEnable()
-    {
-        GameManager.OnGameOver += OnGameOver;
-        GameManager.OnPlay += OnPlay;
-        GameManager.OnMenu += OnMenu;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnGameOver -= OnGameOver;
-        GameManager.OnPlay -= OnPlay;
-        GameManager.OnMenu -= OnMenu;
-    }
 
     private void Update()
     {
@@ -42,26 +27,31 @@ public class ShieldMovement : MonoBehaviour
         transform.Rotate(0, 0, -xMov * speed * Time.deltaTime);
     }
 
-    private void OnGameOver()
+    private void AutoRotate()
     {
-        canRotate = false;
+        transform.Rotate(0, 0, inMenuRotationSpeed * Time.deltaTime);
     }
 
-    private void OnPlay()
+    public void EnableMovement()
     {
         canRotate = true;
         inMenuRotation = false;
     }
 
-    private void OnMenu()
+    public void BlockMovement()
     {
         canRotate = false;
-        inMenuRotation = true;
     }
 
-    private void AutoRotate()
+    public void EnableAutoRotation()
     {
-        transform.Rotate(0, 0, inMenuRotationSpeed * Time.deltaTime);
+        inMenuRotation = true;
+        canRotate = false;
+    }
+
+    public void DisableAutoRotation()
+    {
+        inMenuRotation = false;
     }
 
 }

@@ -1,65 +1,55 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(MoveTowardsPlanet))]
 public class MeteorController : MonoBehaviour
 {
-    private MoveTowardsPlanet movementController;
-
     [SerializeField] private int damage = 1;
+
+    private Action<GameObject> onDestroyCallback;
+    private MoveTowardsPlanet movementController;
+    private GameManager gameManager;
+
+    public void Initializer(Action<GameObject> callback, GameManager _gameManager)
+    {
+        onDestroyCallback = callback;
+        gameManager = _gameManager;
+    }
 
     private void Awake()
     {
         movementController = GetComponent<MoveTowardsPlanet>();
     }
 
-    private void OnEnable()
-    {
-        GameManager.OnGameOver += OnGameOver;
-        GameManager.OnReset += OnReset;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnGameOver -= OnGameOver;
-        GameManager.OnReset -= OnReset;
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Planet")
-        {
-            PlanetHealth planetHealth = other.GetComponent<PlanetHealth>();
-            if (planetHealth)
-            {
-                planetHealth.TakeDamage(damage);
-            }
-            else
-            {
-                Debug.Log("[MeteorController][Error] PlanetHealth not found on collider!");
-            }
-        }
+            HandlePlayerCollision(other);
         else if (other.tag == "Shield")
-        {
-            if (GameManager.instance)
-            {
-                GameManager.instance.AddScore();
-            }
-        }
+            HandleShieldCollision(other);
+
+        onDestroyCallback(this.gameObject);
         Destroy(this.gameObject);
     }
 
-    private void OnGameOver()
+    private void HandlePlayerCollision(Collider2D collider)
     {
-        if (movementController)
-        {
-            movementController.canMove = false;
-        }
+        collider.GetComponent<Planet>().PlanetHealth.TakeDamage(damage);
     }
 
-    private void OnReset()
+    private void HandleShieldCollision(Collider2D collider)
     {
-        Destroy(this.gameObject);
+        gameManager.Score.AddScore();
+    }
+
+    public void StopMovement()
+    {
+        movementController.canMove = false;
+    }
+
+    public void ResumeMovement()
+    {
+        movementController.canMove = true;
     }
 
 }

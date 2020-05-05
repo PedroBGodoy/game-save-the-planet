@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,32 +8,25 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float spawnRate = 2f;
     [SerializeField] private bool canSpawn = false;
     [SerializeField] private bool isSpawning = false;
-    [SerializeField] private bool fakeSpawn = false;
     [SerializeField] private float spawnDistanceFromBoundary = 1f;
     [SerializeField] private float startSpawnDelay = 3f;
 
     public GameObject meteorPrefab;
 
     private Vector2 screenBounds;
+    private List<GameObject> spawnedObjects = new List<GameObject>();
+
+    private GameManager gameManager;
+
+    public void Initializer(GameManager _gameManager)
+    {
+        gameManager = _gameManager;
+    }
 
     private void Awake()
     {
         CheckPrefabs();
         GetScreenBoundary();
-    }
-
-    private void OnEnable()
-    {
-        GameManager.OnGameOver += OnGameOver;
-        GameManager.OnPlay += OnPlay;
-        GameManager.OnMenu += OnMenu;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnGameOver -= OnGameOver;
-        GameManager.OnPlay -= OnPlay;
-        GameManager.OnMenu -= OnMenu;
     }
 
     private void Update()
@@ -46,12 +40,12 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnMeteor()
     {
-        Vector3 spawnPoint = GetSpawnPoint();
+        GameObject instance = Instantiate(meteorPrefab, GetSpawnPoint(), Quaternion.identity);
+        spawnedObjects.Add(instance);
 
-        if (!fakeSpawn)
-        {
-            GameObject instance = Instantiate(meteorPrefab, spawnPoint, Quaternion.identity);
-        }
+        MeteorController meteorController = instance.GetComponent<MeteorController>();
+        Action<GameObject> callback = RemoveObject;
+        meteorController.Initializer(callback, gameManager);
 
         yield return new WaitForSeconds(1 / spawnRate);
 
@@ -61,27 +55,33 @@ public class Spawner : MonoBehaviour
             isSpawning = false;
     }
 
+    private void RemoveObject(GameObject _obj)
+    {
+        if (spawnedObjects.Contains(_obj))
+            spawnedObjects.Remove(_obj);
+    }
+
     private Vector3 GetSpawnPoint()
     {
         Vector3 spawnPoint = Vector3.zero;
 
-        int side = Random.Range(1, 4 + 1);
+        int side = UnityEngine.Random.Range(1, 4 + 1);
         switch (side)
         {
             case 1:
-                spawnPoint.x = Random.Range(-screenBounds.x, screenBounds.x + 1);
+                spawnPoint.x = UnityEngine.Random.Range(-screenBounds.x, screenBounds.x + 1);
                 spawnPoint.y = screenBounds.y;
                 break;
             case 2:
-                spawnPoint.y = Random.Range(-screenBounds.y, screenBounds.y + 1);
+                spawnPoint.y = UnityEngine.Random.Range(-screenBounds.y, screenBounds.y + 1);
                 spawnPoint.x = screenBounds.x;
                 break;
             case 3:
-                spawnPoint.x = Random.Range(-screenBounds.x, screenBounds.x + 1);
+                spawnPoint.x = UnityEngine.Random.Range(-screenBounds.x, screenBounds.x + 1);
                 spawnPoint.y = -screenBounds.y;
                 break;
             case 4:
-                spawnPoint.y = Random.Range(-screenBounds.y, screenBounds.y + 1);
+                spawnPoint.y = UnityEngine.Random.Range(-screenBounds.y, screenBounds.y + 1);
                 spawnPoint.x = -screenBounds.x;
                 break;
         }
@@ -105,26 +105,44 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void OnGameOver()
+    public void StartSpawner()
+    {
+        StartCoroutine("StartSpawnerCourotine");
+    }
+
+    public void StopSpawner()
     {
         canSpawn = false;
         isSpawning = false;
         StopAllCoroutines();
     }
 
-    private void OnPlay()
+    public void DestroyAllSpawnedObjects()
     {
-        StartCoroutine("StartSpawner");
+        foreach (GameObject obj in spawnedObjects)
+        {
+            Destroy(obj);
+        }
+        spawnedObjects.Clear();
     }
 
-    private void OnMenu()
+    public void StopAllObjectsMovement()
     {
-        canSpawn = false;
-        isSpawning = false;
-        StopAllCoroutines();
+        foreach (GameObject obj in spawnedObjects)
+        {
+            obj.GetComponent<MeteorController>().StopMovement();
+        }
     }
 
-    IEnumerator StartSpawner()
+    public void ResumeAllObjectsMovement()
+    {
+        foreach (GameObject obj in spawnedObjects)
+        {
+            obj.GetComponent<MeteorController>().ResumeMovement();
+        }
+    }
+
+    IEnumerator StartSpawnerCourotine()
     {
         yield return new WaitForSeconds(startSpawnDelay);
 

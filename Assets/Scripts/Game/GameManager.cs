@@ -1,73 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(StateMachine))]
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    [SerializeField] private HUD hud = null;
+    [SerializeField] private Spawner spawner = null;
+    [SerializeField] private Planet planet = null;
+    [SerializeField] private Shield shield = null;
+    [SerializeField] private CameraController cameraController = null;
+    [SerializeField] private GameSettings gameSettings = null;
 
-    public float gameSpeed = 1;
+    private StateMachine stateMachine;
+    private ScoreController scoreController = new ScoreController();
 
-    public delegate void GameOverDelegate();
-    public static event GameOverDelegate OnGameOver;
-    public delegate void PlayDelegate();
-    public static event PlayDelegate OnPlay;
-    public delegate void MenuDelegate();
-    public static event MenuDelegate OnMenu;
-    public delegate void ResetDelegate();
-    public static event ResetDelegate OnReset;
-
-    public int score { get; private set; }
+    public HUD HUD => hud;
+    public ScoreController Score => scoreController;
+    public Spawner Spawner => spawner;
+    public Planet Planet => planet;
+    public Shield Shield => shield;
+    public CameraController Camera => cameraController;
+    public GameSettings GameSettings => gameSettings;
+    public StateMachine StateMachine => stateMachine;
 
     private void Awake()
     {
-        if (instance)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
+        stateMachine = GetComponent<StateMachine>();
 
-    private void Start()
-    {
-        Menu();
+        stateMachine.Initialize(this);
+        spawner.Initializer(this);
+
+        if (!gameSettings)
+        {
+            Debug.LogError("[GameManager][CRITICAL] No GameSettings found!");
+            this.enabled = false;
+        }
     }
 
     private void Update()
     {
-        if (Time.timeScale != gameSpeed)
-        {
-            Time.timeScale = gameSpeed;
-        }
+        CheckPlayerHealth();
     }
 
-    public void AddScore()
+    private void CheckPlayerHealth()
     {
-        score++;
+        if (planet.PlanetHealth.health == 0)
+            StateMachine.OnGameOver();
     }
-
-    public void Menu()
-    {
-        OnMenu();
-    }
-
-    public void Reset()
-    {
-        score = 0;
-        OnReset();
-    }
-
-    public void Play()
-    {
-        OnPlay();
-    }
-
-    public void GameOver()
-    {
-        OnGameOver();
-    }
-
 }

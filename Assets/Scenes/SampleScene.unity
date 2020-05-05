@@ -206,9 +206,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1087732057}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: PlayAgain
+      - m_Target: {fileID: 1403824234}
+        m_TargetAssemblyTypeName: StateMachine, Assembly-CSharp
+        m_MethodName: OnPlayButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -266,8 +266,9 @@ GameObject:
   m_Component:
   - component: {fileID: 119744930}
   - component: {fileID: 119744931}
-  - component: {fileID: 119744932}
   - component: {fileID: 119744933}
+  - component: {fileID: 119744934}
+  - component: {fileID: 119744932}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Shield
@@ -384,6 +385,19 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &119744934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119744929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541dbc1ab76a033488fc94cc6a93eb45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldMovement: {fileID: 119744932}
 --- !u!1 &153075211
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,9 +786,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1087732057}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: Menu
+      - m_Target: {fileID: 1403824234}
+        m_TargetAssemblyTypeName: StateMachine, Assembly-CSharp
+        m_MethodName: OnMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -854,7 +868,6 @@ MonoBehaviour:
   spawnRate: 0.75
   canSpawn: 0
   isSpawning: 0
-  fakeSpawn: 0
   spawnDistanceFromBoundary: 2
   startSpawnDelay: 3
   meteorPrefab: {fileID: 479232492447963737, guid: dbf7d0eb940d24f4784aabb0e50eec98,
@@ -912,8 +925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b598d17cf3b8141acf360a4581cc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inMenuPosition: -20
-  inGamePosition: -15
   translationSpeed: 5
   translationCurve:
     serializedVersion: 2
@@ -1087,9 +1098,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1087732057}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: Play
+      - m_Target: {fileID: 1403824234}
+        m_TargetAssemblyTypeName: StateMachine, Assembly-CSharp
+        m_MethodName: OnPlayButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1151,7 +1162,7 @@ GameObject:
   - component: {fileID: 1087732053}
   - component: {fileID: 1087732057}
   m_Layer: 5
-  m_Name: MainCanvas
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1249,7 +1260,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1087732052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81fdbe8f3f5da374b9391136e1ecc713, type: 3}
+  m_Script: {fileID: 11500000, guid: d80d6a04f6d12444ca3016237be47a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scoreTxt: {fileID: 153075213}
@@ -1265,7 +1276,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1403824231}
-  - component: {fileID: 1403824232}
+  - component: {fileID: 1403824234}
+  - component: {fileID: 1403824233}
   m_Layer: 0
   m_Name: GameManger
   m_TagString: Untagged
@@ -1287,7 +1299,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1403824232
+--- !u!114 &1403824233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1299,7 +1311,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3514ccde6895f54d96f65ab8e52a5f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSpeed: 1
+  hud: {fileID: 1087732057}
+  spawner: {fileID: 287151164}
+  planet: {fileID: 4088502937760859428}
+  shield: {fileID: 119744934}
+  cameraController: {fileID: 519420030}
+  gameSettings: {fileID: 11400000, guid: 2b38646c9efdf6548a2ef20537f3244d, type: 2}
+--- !u!114 &1403824234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403824230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ad606f19f5b65419568e76d2a0d905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1442223076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,13 +1848,19 @@ PrefabInstance:
     - target: {fileID: 4088502937615870455, guid: c7a9e071512422c4a8dda0a378c04901,
         type: 3}
       propertyPath: m_Name
-      value: Planet
+      value: Earth
       objectReference: {fileID: 0}
-    - target: {fileID: 4088502937615870457, guid: c7a9e071512422c4a8dda0a378c04901,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e446148f584ad464d97d4faac66f00f3,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a9e071512422c4a8dda0a378c04901, type: 3}
+--- !u!114 &4088502937760859428 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6841648882300100059, guid: c7a9e071512422c4a8dda0a378c04901,
+    type: 3}
+  m_PrefabInstance: {fileID: 4088502937760859425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34694819586c13e4d9b1de0db2170384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
