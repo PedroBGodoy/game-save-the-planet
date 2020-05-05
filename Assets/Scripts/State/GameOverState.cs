@@ -1,29 +1,26 @@
 using System.Collections;
 
-public class GameOverState : State
+public class GameOverState : GameState
 {
     public GameOverState(GameManager _manager) : base(_manager) { }
 
-    public override IEnumerator Start()
+    public override void Start()
     {
         manager.HUD.GameOver();
         manager.Spawner.StopAllObjectsMovement();
         manager.Spawner.StopSpawner();
         manager.Camera.MoveCameraTo(manager.GameSettings.cam_inMenuPosition);
-        yield break;
     }
 
-    public override IEnumerator Menu()
+    public override void Menu()
     {
         manager.Spawner.DestroyAllSpawnedObjects();
-        manager.StateMachine.SetState(new MenuState(manager));
-        yield break;
+        manager.GameStateMachine.SetState(new MenuState(manager));
     }
 
-    public override IEnumerator Play()
+    public override void Play()
     {
         manager.Spawner.DestroyAllSpawnedObjects();
-        manager.StateMachine.SetState(new PlayState(manager));
-        yield break;
+        manager.GameStateMachine.SetState(new PlayState(manager));
     }
 }

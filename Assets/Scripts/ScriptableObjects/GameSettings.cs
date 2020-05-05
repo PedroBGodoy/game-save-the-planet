@@ -20,4 +20,7 @@ public class GameSettings : ScriptableObject
     public float cam_inMenuPosition = -20f;
     public float cam_inGamePosition = -15f;
     public float cam_translationSpeed = 5f;
+
+    [Header("General Settings")]
+    public float resumeGameSeconds = 3f;
 }

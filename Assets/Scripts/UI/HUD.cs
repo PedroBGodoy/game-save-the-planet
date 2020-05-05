@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-
     public TextMeshProUGUI scoreTxt;
     public Button playBtn;
     public Button menuBtn;
     public Button playAgainBtn;
 
-    private void Update()
+    public void Menu()
     {
-        if (scoreTxt && OldGameManager.instance)
-            scoreTxt.text = OldGameManager.instance.score.ToString();
+        menuBtn.gameObject.SetActive(false);
+        playAgainBtn.gameObject.SetActive(false);
+        playBtn.gameObject.SetActive(true);
     }
 
     public void Play()
@@ -25,17 +23,9 @@ public class HUD : MonoBehaviour
         playAgainBtn.gameObject.SetActive(false);
     }
 
-    public void PlayAgain()
+    public void UpdateScore(int score)
     {
-        OldGameManager.instance.Reset();
-        OldGameManager.instance.Play();
-    }
-
-    public void Menu()
-    {
-        menuBtn.gameObject.SetActive(false);
-        playAgainBtn.gameObject.SetActive(false);
-        playBtn.gameObject.SetActive(true);
+        scoreTxt.text = score.ToString();
     }
 
     public void GameOver()

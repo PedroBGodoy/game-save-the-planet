@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(StateMachine))]
+[RequireComponent(typeof(GameStateMachine))]
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private HUD hud = null;
@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraController cameraController = null;
     [SerializeField] private GameSettings gameSettings = null;
 
-    private StateMachine stateMachine;
+    private GameStateMachine gameStateMachine;
     private ScoreController scoreController = new ScoreController();
 
     public HUD HUD => hud;
@@ -20,30 +20,35 @@ public class GameManager : MonoBehaviour
     public Shield Shield => shield;
     public CameraController Camera => cameraController;
     public GameSettings GameSettings => gameSettings;
-    public StateMachine StateMachine => stateMachine;
+    public GameStateMachine GameStateMachine => gameStateMachine;
 
     private void Awake()
     {
-        stateMachine = GetComponent<StateMachine>();
+        gameStateMachine = this.GetComponent<GameStateMachine>();
 
-        stateMachine.Initialize(this);
+        gameStateMachine.Initialize(this);
         spawner.Initializer(this);
 
-        if (!gameSettings)
-        {
-            Debug.LogError("[GameManager][CRITICAL] No GameSettings found!");
-            this.enabled = false;
-        }
+        CheckGameSettings();
     }
 
-    private void Update()
-    {
-        CheckPlayerHealth();
-    }
-
-    private void CheckPlayerHealth()
+    public void CheckPlayerHealth()
     {
         if (planet.PlanetHealth.health == 0)
-            StateMachine.OnGameOver();
+            GameStateMachine.OnGameOver();
     }
+
+    public void UpdateScoreHUD()
+    {
+        HUD.UpdateScore(scoreController.GetScore());
+    }
+
+    private void CheckGameSettings()
+    {
+        if (gameSettings) return;
+
+        Debug.LogError("[GameManager][CRITICAL] No GameSettings found! Desabling component!");
+        this.enabled = false;
+    }
+
 }

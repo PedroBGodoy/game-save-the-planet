@@ -1,21 +1,21 @@
 using System.Collections;
 using UnityEngine;
 
-public class MenuState : State
+public class MenuState : GameState
 {
     public MenuState(GameManager _manager) : base(_manager) { }
 
-    public override IEnumerator Start()
+    public override void Start()
     {
         manager.HUD.Menu();
         manager.Score.LoadScore();
+        manager.UpdateScoreHUD();
+
         manager.Shield.ShieldMovement.BlockMovement();
-        yield break;
     }
 
-    public override IEnumerator Play()
+    public override void Play()
     {
-        manager.StateMachine.SetState(new PlayState(manager));
-        yield break;
+        manager.GameStateMachine.SetState(new PlayState(manager));
     }
 }

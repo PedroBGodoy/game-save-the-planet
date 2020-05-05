@@ -1,39 +1,38 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayState : State
+public class PlayState : GameState
 {
     public PlayState(GameManager _manager) : base(_manager) { }
 
-    public override IEnumerator Start()
+    public override void Start()
     {
         manager.Score.ResetScore();
+        manager.UpdateScoreHUD();
         manager.Planet.PlanetHealth.ResetHealth();
 
         manager.HUD.Play();
         manager.Shield.ShieldMovement.EnableMovement();
         manager.Spawner.StartSpawner();
         manager.Camera.MoveCameraTo(manager.GameSettings.cam_inGamePosition);
-        yield break;
     }
 
-    public override IEnumerator GameOver()
+    public override void GameOver()
     {
-        manager.StateMachine.SetState(new GameOverState(manager));
-        yield break;
+        manager.GameStateMachine.SetState(new GameOverState(manager));
     }
 
-    public override IEnumerator Pause()
+    public override void Pause()
     {
         manager.Spawner.StopSpawner();
         manager.Spawner.StopAllObjectsMovement();
-        yield break;
     }
 
     public override IEnumerator Resume()
     {
         manager.Spawner.StartSpawner();
         manager.Spawner.ResumeAllObjectsMovement();
-        yield break;
+
+        yield return new WaitForSeconds(manager.GameSettings.resumeGameSeconds);
     }
 }
