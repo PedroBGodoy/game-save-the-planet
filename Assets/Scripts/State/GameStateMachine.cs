@@ -17,13 +17,17 @@ public class GameStateMachine : MonoBehaviour
         currentState.Start();
     }
 
+    private void Update() => currentState.Update();
+
     public void OnMenuButton() => currentState.Menu();
 
     public void OnPlayButton() => currentState.Play();
 
     public void OnGameOver() => currentState.GameOver();
 
+    public void OnPause() => currentState.Pause();
     public void OnPauseButton() => currentState.Pause();
 
     public void OnResumeButton() => currentState.Resume();
+
 }

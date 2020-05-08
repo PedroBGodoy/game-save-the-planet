@@ -32,15 +32,14 @@ public class GameManager : MonoBehaviour
         CheckGameSettings();
     }
 
+    public void UpdateScoreHUD() => HUD.UpdateScore(scoreController.GetScore());
+
+    private void OnApplicationPause(bool pauseStatus) => gameStateMachine.OnPause();
+
     public void CheckPlayerHealth()
     {
         if (planet.PlanetHealth.health == 0)
             GameStateMachine.OnGameOver();
-    }
-
-    public void UpdateScoreHUD()
-    {
-        HUD.UpdateScore(scoreController.GetScore());
     }
 
     private void CheckGameSettings()

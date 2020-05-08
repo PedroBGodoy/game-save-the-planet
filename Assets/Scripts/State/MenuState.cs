@@ -1,6 +1,3 @@
-using System.Collections;
-using UnityEngine;
-
 public class MenuState : GameState
 {
     public MenuState(GameManager _manager) : base(_manager) { }
@@ -14,8 +11,5 @@ public class MenuState : GameState
         manager.Shield.ShieldMovement.BlockMovement();
     }
 
-    public override void Play()
-    {
-        manager.GameStateMachine.SetState(new PlayState(manager));
-    }
+    public override void Play() => manager.GameStateMachine.SetState(new PlayState(manager));
 }

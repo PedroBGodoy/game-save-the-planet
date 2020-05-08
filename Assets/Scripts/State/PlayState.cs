@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayState : GameState
@@ -17,22 +16,13 @@ public class PlayState : GameState
         manager.Camera.MoveCameraTo(manager.GameSettings.cam_inGamePosition);
     }
 
-    public override void GameOver()
+    public override void Update()
     {
-        manager.GameStateMachine.SetState(new GameOverState(manager));
+        if (Input.GetKeyDown(KeyCode.Escape))
+            manager.GameStateMachine.OnPause();
     }
 
-    public override void Pause()
-    {
-        manager.Spawner.StopSpawner();
-        manager.Spawner.StopAllObjectsMovement();
-    }
+    public override void GameOver() => manager.GameStateMachine.SetState(new GameOverState(manager));
 
-    public override IEnumerator Resume()
-    {
-        manager.Spawner.StartSpawner();
-        manager.Spawner.ResumeAllObjectsMovement();
-
-        yield return new WaitForSeconds(manager.GameSettings.resumeGameSeconds);
-    }
+    public override void Pause() => manager.GameStateMachine.SetState(new PauseState(manager));
 }

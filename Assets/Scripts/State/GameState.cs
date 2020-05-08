@@ -1,5 +1,3 @@
-using System.Collections;
-
 public abstract class GameState
 {
     protected readonly GameManager manager;
@@ -19,9 +17,10 @@ public abstract class GameState
 
     public virtual void Pause() { }
 
-    public virtual IEnumerator Resume()
-    {
-        yield break;
-    }
+    public virtual void Resume() { }
+
+    public virtual void TogglePause() { }
+
+    public virtual void Update() { }
 
 }

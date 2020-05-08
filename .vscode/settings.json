@@ -1,5 +1,7 @@
 {
     "files.exclude": {
-        "**/*.meta": true
+        "**/*.meta": true,
+        "[^A]*": true,
+        "**/*.csproj": true
     }
 }
