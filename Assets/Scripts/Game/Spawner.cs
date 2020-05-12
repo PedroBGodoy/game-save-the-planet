@@ -10,8 +10,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] private bool isSpawning = false;
     [SerializeField] private float spawnDistanceFromBoundary = 1f;
     [SerializeField] private float startSpawnDelay = 3f;
+    [SerializeField] private bool cubeSpawn = false;
 
-    public GameObject meteorPrefab;
+    public GameObject MeteorPrefab;
 
     private Vector2 screenBounds;
     private List<GameObject> spawnedObjects = new List<GameObject>();
@@ -40,7 +41,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnMeteor()
     {
-        GameObject instance = Instantiate(meteorPrefab, GetSpawnPoint(), Quaternion.identity);
+        GameObject instance = Instantiate(MeteorPrefab, GetSpawnPoint(), Quaternion.identity);
         spawnedObjects.Add(instance);
 
         MeteorController meteorController = instance.GetComponent<MeteorController>();
@@ -63,30 +64,24 @@ public class Spawner : MonoBehaviour
 
     private Vector3 GetSpawnPoint()
     {
-        Vector3 spawnPoint = Vector3.zero;
-
         int side = UnityEngine.Random.Range(1, 4 + 1);
+
+        float yBound = cubeSpawn ? screenBounds.x : screenBounds.y;
+        float xBound = screenBounds.x;
+
         switch (side)
         {
             case 1:
-                spawnPoint.x = UnityEngine.Random.Range(-screenBounds.x, screenBounds.x + 1);
-                spawnPoint.y = screenBounds.y;
-                break;
+                return new Vector3(UnityEngine.Random.Range(-xBound, xBound + 1), yBound, 0);
             case 2:
-                spawnPoint.y = UnityEngine.Random.Range(-screenBounds.y, screenBounds.y + 1);
-                spawnPoint.x = screenBounds.x;
-                break;
+                return new Vector3(xBound, UnityEngine.Random.Range(-yBound, yBound + 1), 0);
             case 3:
-                spawnPoint.x = UnityEngine.Random.Range(-screenBounds.x, screenBounds.x + 1);
-                spawnPoint.y = -screenBounds.y;
-                break;
+                return new Vector3(UnityEngine.Random.Range(-xBound, xBound + 1), -yBound, 0);
             case 4:
-                spawnPoint.y = UnityEngine.Random.Range(-screenBounds.y, screenBounds.y + 1);
-                spawnPoint.x = -screenBounds.x;
-                break;
+                return new Vector3(-xBound, UnityEngine.Random.Range(-yBound, screenBounds.y + 1), 0);
+            default:
+                return Vector3.zero;
         }
-
-        return spawnPoint;
     }
 
     private void GetScreenBoundary()
@@ -98,7 +93,7 @@ public class Spawner : MonoBehaviour
 
     private void CheckPrefabs()
     {
-        if (!meteorPrefab)
+        if (!MeteorPrefab)
         {
             Debug.Log("[Spawner][Error] Meteor prefab missing!");
             canSpawn = false;

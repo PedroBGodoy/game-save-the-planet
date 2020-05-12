@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 479232492447963684}
   - component: {fileID: 479232492447963738}
   - component: {fileID: 256944684}
+  - component: {fileID: 8137448081268486806}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Meteor
@@ -260,3 +261,25 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &8137448081268486806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479232492447963737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571db6e4457d94347846670e851ebbbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radarIconPrefab: {fileID: 2453575017151053281, guid: 6ce6e5720be1f7d41b58eb7725d7f276,
+    type: 3}
+  radarIconDistanceFromBound: 0.6
+  warningDistanceColor:
+  - distance: 1
+    color: {r: 1, g: 0, b: 0, a: 1}
+  - distance: 2
+    color: {r: 1, g: 0.8057229, b: 0, a: 1}
+  - distance: 10
+    color: {r: 0.13313478, g: 0.8113208, b: 0, a: 1}

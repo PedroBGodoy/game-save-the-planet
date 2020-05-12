@@ -965,7 +965,8 @@ MonoBehaviour:
   isSpawning: 0
   spawnDistanceFromBoundary: 2
   startSpawnDelay: 3
-  meteorPrefab: {fileID: 479232492447963737, guid: dbf7d0eb940d24f4784aabb0e50eec98,
+  cubeSpawn: 1
+  MeteorPrefab: {fileID: 479232492447963737, guid: dbf7d0eb940d24f4784aabb0e50eec98,
     type: 3}
 --- !u!4 &287151165
 Transform:
@@ -2210,6 +2211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Earth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088502937615870459, guid: c7a9e071512422c4a8dda0a378c04901,
+        type: 3}
+      propertyPath: isInvincible
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a9e071512422c4a8dda0a378c04901, type: 3}

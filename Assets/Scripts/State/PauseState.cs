@@ -4,11 +4,8 @@ public class PauseState : GameState
 {
     public PauseState(GameManager _manager) : base(_manager) { }
 
-    private bool isPaused = false;
-
     public override void Start()
     {
-        isPaused = true;
         Time.timeScale = 0;
         manager.HUD.ShowPausePanel();
     }
@@ -21,7 +18,6 @@ public class PauseState : GameState
 
     public override void Resume()
     {
-        isPaused = false;
         Time.timeScale = 1;
         manager.HUD.HidePausePanel();
 
