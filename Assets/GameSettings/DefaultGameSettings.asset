@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117aa89c7108f5e408ee4746be3627f8, type: 3}
   m_Name: DefaultGameSettings
   m_EditorClassIdentifier: 
-  maxHealth: 3
-  shieldSpeed: 175
-  inMenuRotationSpeed: 10
-  spawnRate: 0.75
-  spawnDistanceFromBoundary: 2
-  startSpawnDelay: 3
-  meteorPrefab: {fileID: 479232492447963737, guid: dbf7d0eb940d24f4784aabb0e50eec98,
-    type: 3}
+  defaultLevel: {fileID: 11400000, guid: abe2ca306f3aa5c418373592ac73be0d, type: 2}
+  player_maxHealth: 3
+  shield_Speed: 175
+  shield_inMenuSpeed: 10
+  spawn_Rate: 0.75
+  spawn_DistanceFromBoundary: 2
+  spawn_startDelay: 3
+  spawn_meteorPrefab: {fileID: 0}
+  cam_inMenuPosition: -20
+  cam_inGamePosition: -15
+  cam_translationSpeed: 5
+  resumeGameSeconds: 3

@@ -23,4 +23,8 @@ public abstract class GameState
 
     public virtual void Update() { }
 
+    public virtual void ChangeLevel(Level level) { }
+
+    public virtual void CheckPlanetHealth() { }
+
 }

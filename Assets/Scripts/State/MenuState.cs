@@ -5,8 +5,7 @@ public class MenuState : GameState
     public override void Start()
     {
         manager.HUD.Menu();
-        manager.Score.LoadScore();
-        manager.UpdateScoreHUD();
+        manager.ScoreController.LoadScore();
 
         manager.Shield.ShieldMovement.BlockMovement();
     }

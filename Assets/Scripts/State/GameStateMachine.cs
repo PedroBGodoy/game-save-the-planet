@@ -30,4 +30,8 @@ public class GameStateMachine : MonoBehaviour
 
     public void OnResumeButton() => currentState.Resume();
 
+    public void OnLevelChange(Level level) => currentState.ChangeLevel(level);
+
+    public void OnMeteorCollideWithPlanet() => currentState.CheckPlanetHealth();
+
 }

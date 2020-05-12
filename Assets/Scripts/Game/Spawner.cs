@@ -116,7 +116,7 @@ public class Spawner : MonoBehaviour
     {
         foreach (GameObject obj in spawnedObjects)
         {
-            Destroy(obj);
+            obj.GetComponent<MeteorController>().DestroyMeteor();
         }
         spawnedObjects.Clear();
     }

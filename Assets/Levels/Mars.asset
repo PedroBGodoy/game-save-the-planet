@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bb61c7ab66016449f2e3121a5d9c7e, type: 3}
+  m_Name: Mars
+  m_EditorClassIdentifier: 
+  index: 1
+  Name: Mars
+  PlanetPrefab: {fileID: 2320190712125715754, guid: 0c89673183ccb9a418e348f25b8f1b52,
+    type: 3}
+  MeteorPrefab: {fileID: 479232492447963737, guid: dbf7d0eb940d24f4784aabb0e50eec98,
+    type: 3}

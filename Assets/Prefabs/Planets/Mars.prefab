@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4088502937615870455
+--- !u!1 &2320190712125715754
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4088502937615870454}
-  - component: {fileID: 4088502937615870457}
-  - component: {fileID: 4088502937615870456}
-  - component: {fileID: 6841648882300100059}
-  - component: {fileID: 4088502937615870459}
+  - component: {fileID: 2320190712125715755}
+  - component: {fileID: 2320190712125715748}
+  - component: {fileID: 2320190712125715749}
+  - component: {fileID: 5079450711342170374}
+  - component: {fileID: 2320190712125715750}
   m_Layer: 0
-  m_Name: Earth
+  m_Name: Mars
   m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4088502937615870454
+--- !u!4 &2320190712125715755
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4088502937615870455}
+  m_GameObject: {fileID: 2320190712125715754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
@@ -34,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4088502937615870457
+--- !u!212 &2320190712125715748
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4088502937615870455}
+  m_GameObject: {fileID: 2320190712125715754}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6194057bdfb6c6744a350c6fb18ca976, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 878b99ed151b5b14980637b3b0239d4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,13 +85,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4088502937615870456
+--- !u!58 &2320190712125715749
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4088502937615870455}
+  m_GameObject: {fileID: 2320190712125715754}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -101,30 +101,30 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.05
---- !u!114 &6841648882300100059
+--- !u!114 &5079450711342170374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4088502937615870455}
+  m_GameObject: {fileID: 2320190712125715754}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34694819586c13e4d9b1de0db2170384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetHealth: {fileID: 4088502937615870459}
---- !u!114 &4088502937615870459
+  planetHealth: {fileID: 2320190712125715750}
+--- !u!114 &2320190712125715750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4088502937615870455}
+  m_GameObject: {fileID: 2320190712125715754}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79620ed01f49657449f87bced3734453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  isInvincible: 0
+  isInvincible: 1

@@ -12,12 +12,14 @@ public class ObjectRadar : MonoBehaviour
 
     [SerializeField] private GameObject radarIconPrefab = null;
     [SerializeField] private float radarIconDistanceFromBound = 2f;
-    [SerializeField] private WarningDistanceColor[] warningDistanceColor;
+    [SerializeField] private WarningDistanceColor[] warningDistanceColor = { };
 
     private Vector3 _screenBounds;
     private GameObject _radarIconInstance;
     private bool _isInsideBounds = false;
     private SpriteRenderer _radarIconSprite;
+
+    public GameObject RadarIconInstance => _radarIconInstance;
 
     private void Start()
     {
@@ -36,8 +38,10 @@ public class ObjectRadar : MonoBehaviour
         }
 
         UpdateRadarIconPosition(ref _radarIconInstance, _screenBounds);
+
         float distanceFromBound = Vector3.Distance(_radarIconInstance.transform.position, this.transform.position) - radarIconDistanceFromBound;
         UpdateRadarIconSprite(ref _radarIconSprite, distanceFromBound);
+
         _isInsideBounds = CheckIfInsideBounds(this.gameObject, _screenBounds);
     }
 

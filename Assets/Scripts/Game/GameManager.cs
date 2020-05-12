@@ -5,42 +5,36 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private HUD hud = null;
     [SerializeField] private Spawner spawner = null;
-    [SerializeField] private Planet planet = null;
     [SerializeField] private Shield shield = null;
     [SerializeField] private CameraController cameraController = null;
     [SerializeField] private GameSettings gameSettings = null;
+    [SerializeField] private LevelManager levelManager = null;
 
     private GameStateMachine gameStateMachine;
     private ScoreController scoreController = new ScoreController();
 
     public HUD HUD => hud;
-    public ScoreController Score => scoreController;
+    public ScoreController ScoreController => scoreController;
     public Spawner Spawner => spawner;
-    public Planet Planet => planet;
+    public Planet Planet => levelManager.CurrentPlanet;
     public Shield Shield => shield;
     public CameraController Camera => cameraController;
     public GameSettings GameSettings => gameSettings;
     public GameStateMachine GameStateMachine => gameStateMachine;
+    public LevelManager LevelManager => levelManager;
 
     private void Awake()
     {
         gameStateMachine = this.GetComponent<GameStateMachine>();
 
+        CheckGameSettings();
+
         gameStateMachine.Initialize(this);
         spawner.Initializer(this);
-
-        CheckGameSettings();
+        levelManager.Initialize(this, gameSettings.defaultLevel);
     }
-
-    public void UpdateScoreHUD() => HUD.UpdateScore(scoreController.GetScore());
 
     private void OnApplicationPause(bool pauseStatus) => gameStateMachine.OnPause();
-
-    public void CheckPlayerHealth()
-    {
-        if (planet.PlanetHealth.health == 0)
-            GameStateMachine.OnGameOver();
-    }
 
     private void CheckGameSettings()
     {

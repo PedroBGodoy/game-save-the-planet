@@ -3,6 +3,9 @@
 [CreateAssetMenu(fileName = "GameSettings", menuName = "SaveThePlanet/GameSettings", order = 0)]
 public class GameSettings : ScriptableObject
 {
+    [Header("Level Settings")]
+    public Level defaultLevel;
+
     [Header("Planet Settings")]
     public int player_maxHealth = 3;
 

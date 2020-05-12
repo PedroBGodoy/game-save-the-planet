@@ -6,8 +6,8 @@ public class PlayState : GameState
 
     public override void Start()
     {
-        manager.Score.ResetScore();
-        manager.UpdateScoreHUD();
+        manager.ScoreController.ResetScore();
+        manager.HUD.UpdateScore(manager.ScoreController.GetScore());
         manager.Planet.PlanetHealth.ResetHealth();
 
         manager.HUD.Play();
@@ -25,4 +25,12 @@ public class PlayState : GameState
     public override void GameOver() => manager.GameStateMachine.SetState(new GameOverState(manager));
 
     public override void Pause() => manager.GameStateMachine.SetState(new PauseState(manager));
+
+    public override void CheckPlanetHealth()
+    {
+        if (manager.Planet.PlanetHealth.health <= 0)
+            manager.GameStateMachine.OnGameOver();
+    }
+    private void UpdateScore() => manager.HUD.UpdateScore(manager.ScoreController.GetScore());
+
 }

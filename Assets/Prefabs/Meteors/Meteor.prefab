@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 479232492447963739}
   - component: {fileID: 479232492447963687}
   - component: {fileID: 479232492447963685}
+  - component: {fileID: 256944684}
   - component: {fileID: 479232492447963684}
   - component: {fileID: 479232492447963738}
-  - component: {fileID: 256944684}
   - component: {fileID: 8137448081268486806}
   m_Layer: 0
   m_Name: Meteor
@@ -125,35 +125,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.05
---- !u!114 &479232492447963684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479232492447963737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3eb57e3923919847a0bf9858e48796a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
---- !u!114 &479232492447963738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479232492447963737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e09ba153c3734d3418bdf10b1de31b2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canMove: 1
-  speed: 2.75
-  targetDistanceTolerance: 1.4
-  drawLine: 0
 --- !u!96 &256944684
 TrailRenderer:
   serializedVersion: 2
@@ -261,6 +232,36 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &479232492447963684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479232492447963737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3eb57e3923919847a0bf9858e48796a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  objectRadar: {fileID: 8137448081268486806}
+--- !u!114 &479232492447963738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479232492447963737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09ba153c3734d3418bdf10b1de31b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canMove: 1
+  speed: 2.5
+  targetDistanceTolerance: 1.4
+  drawLine: 0
 --- !u!114 &8137448081268486806
 MonoBehaviour:
   m_ObjectHideFlags: 0

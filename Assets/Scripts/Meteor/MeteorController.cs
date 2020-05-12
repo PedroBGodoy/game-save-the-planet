@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeteorController : MonoBehaviour
 {
     [SerializeField] private int damage = 1;
+    [SerializeField] private ObjectRadar objectRadar;
 
     private Action<GameObject> onDestroyCallback;
     private MoveTowardsPlanet movementController;
@@ -41,16 +42,22 @@ public class MeteorController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void DestroyMeteor()
+    {
+        Destroy(objectRadar.RadarIconInstance);
+        Destroy(this.gameObject);
+    }
+
     private void HandlePlanetCollision(Collider2D collider)
     {
         collider.GetComponent<Planet>().PlanetHealth.TakeDamage(damage);
-        gameManager.CheckPlayerHealth();
+        gameManager.GameStateMachine.OnMeteorCollideWithPlanet();
     }
 
     private void HandleShieldCollision(Collider2D collider)
     {
-        gameManager.Score.AddScore();
-        gameManager.UpdateScoreHUD();
+        gameManager.ScoreController.AddScore();
+        gameManager.HUD.UpdateScore(gameManager.ScoreController.GetScore());
     }
 
     public void StopMovement() => movementController.canMove = false;
