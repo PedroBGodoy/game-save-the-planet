@@ -8,6 +8,7 @@ public class MenuState : GameState
         manager.ScoreController.LoadScore();
 
         manager.Shield.ShieldMovement.BlockMovement();
+        manager.Camera.MoveCameraTo(manager.GameSettings.cam_inMenuPosition);
     }
 
     public override void Play() => manager.GameStateMachine.SetState(new PlayState(manager));

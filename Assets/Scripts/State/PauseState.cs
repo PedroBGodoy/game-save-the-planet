@@ -16,6 +16,14 @@ public class PauseState : GameState
             Resume();
     }
 
+    public override void Menu()
+    {
+        Resume();
+        manager.Spawner.DestroyAllSpawnedObjects();
+        manager.Spawner.StopSpawner();
+        manager.GameStateMachine.SetState(new MenuState(manager));
+    }
+
     public override void Resume()
     {
         Time.timeScale = 1;
