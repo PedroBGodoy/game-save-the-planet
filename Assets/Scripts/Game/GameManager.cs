@@ -28,13 +28,20 @@ public class GameManager : MonoBehaviour
         gameStateMachine = this.GetComponent<GameStateMachine>();
 
         CheckGameSettings();
+    }
 
+    private void Start()
+    {
         gameStateMachine.Initialize(this);
         spawner.Initializer(this);
         levelManager.Initialize(this, gameSettings.defaultLevel);
     }
 
-    private void OnApplicationPause(bool pauseStatus) => gameStateMachine.OnPause();
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+            gameStateMachine.OnPause();
+    }
 
     private void CheckGameSettings()
     {

@@ -14,7 +14,7 @@ public class HUD : MonoBehaviour
 
     private void Awake()
     {
-        scoreAnim = scoreTxt.gameObject.GetComponent<Animator>();
+        scoreAnim = scoreTxt.GetComponent<Animator>();
     }
 
     public void Menu()
