@@ -11,5 +11,10 @@ public class MenuState : GameState
         manager.Camera.MoveCameraTo(manager.GameSettings.cam_inMenuPosition);
     }
 
+    public override void ChangeLevel(Level level)
+    {
+        manager.HUD.OnLevelChange(level);
+    }
+
     public override void Play() => manager.GameStateMachine.SetState(new PlayState(manager));
 }
