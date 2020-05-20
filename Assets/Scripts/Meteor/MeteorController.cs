@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeteorController : MonoBehaviour
 {
     [SerializeField] private int damage = 1;
-    [SerializeField] private ObjectRadar objectRadar;
+    [SerializeField] private ObjectRadar objectRadar = null;
 
     private Action<GameObject> onDestroyCallback;
     private MoveTowardsPlanet movementController;

@@ -9,6 +9,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private Button menuBtn = null;
     [SerializeField] private Button playAgainBtn = null;
     [SerializeField] private GameObject pausePanel = null;
+    [SerializeField] private GameObject previousLevel;
+    [SerializeField] private GameObject nextLevel;
 
     private Animator scoreAnim;
 
@@ -24,6 +26,9 @@ public class HUD : MonoBehaviour
         playBtn.gameObject.SetActive(true);
         pausePanel.SetActive(false);
         scoreAnim.SetBool("Show", false);
+
+        previousLevel.SetActive(true);
+        nextLevel.SetActive(true);
     }
 
     public void Play()
@@ -33,6 +38,9 @@ public class HUD : MonoBehaviour
         playAgainBtn.gameObject.SetActive(false);
         scoreAnim.SetBool("Show", true);
         scoreTxt.enabled = true;
+
+        previousLevel.SetActive(false);
+        nextLevel.SetActive(false);
     }
 
     public void UpdateScore(int score) => scoreTxt.text = score.ToString();
